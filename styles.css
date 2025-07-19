@@ -972,6 +972,35 @@ body {
   opacity: 1;
 }
 
+.ai-links {
+  list-style: none;
+  padding: 0;
+}
+.ai-links li {
+  margin-bottom: 0.8rem;
+}
+.ai-links a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+  position: relative;
+  padding-left: 0;
+}
+.ai-links a:hover {
+  color: #ffd700;
+  transform: translateX(5px);
+}
+.ai-links a::before {
+  content: '🤖';
+  margin-right: 0.5rem;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+.ai-links a:hover::before {
+  opacity: 1;
+}
+
 .footer-bottom {
   text-align: center;
   padding-top: 2rem;
@@ -1151,5 +1180,59 @@ body {
   }
   .fengshui-luopan {
     margin-top: 1rem;
+  }
+}
+
+.gufeng-poem {
+  font-family: 'FZKai-Z03', '楷体', 'STKaiti', '仿宋', 'FangSong', serif;
+  color: #e9bfcf;
+  font-size: 1.05rem;
+  letter-spacing: 0.13em;
+  line-height: 1.7;
+  margin-bottom: 0.7em;
+  font-weight: 400;
+  text-align: left;
+  display: block;
+}
+
+/* 让按钮和距离显示区左对齐 */
+.hero-distance-block {
+  text-align: left;
+  margin-top: 1.5rem;
+}
+.hero-distance-block .btn {
+  margin-top: 1rem;
+  display: inline-block;
+}
+.hero-distance-block #distance-result {
+  margin-top: 0.5rem;
+  font-weight: bold;
+  text-align: left;
+}
+
+.whu-wave {
+  position: absolute;
+  left: 90%;
+  top: 90%;
+  width: 100px;
+  height: 100px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: rgba(44, 90, 160, 0.18);
+  pointer-events: none;
+  animation: whu-wave-anim 1.6s infinite cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+}
+@keyframes whu-wave-anim {
+  0% {
+    transform: translate(-50%, -50%) scale(0.7);
+    opacity: 0.7;
+  }
+  70% {
+    opacity: 0.2;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(3.2);
+    opacity: 0;
   }
 }

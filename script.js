@@ -13,6 +13,12 @@ document.addEventListener('DOMContentLoaded', function () {
   initStatsAnimation()
 })
 
+// 全局变量保存地图和标记点
+let globalMap = null
+let whuMarker = null
+let userMarker = null
+let userLine = null
+
 // 初始化地图
 function initMap() {
   // 检查地图容器是否存在
@@ -22,6 +28,7 @@ function initMap() {
   try {
     // 创建百度地图实例
     const map = new BMap.Map('map')
+    globalMap = map // 保存全局
 
     // 设置地图中心点和缩放级别（武汉大学资环院坐标）
     const point = new BMap.Point(114.364952, 30.536139)
@@ -38,8 +45,22 @@ function initMap() {
     map.disableKeyboard()
 
     // 添加武汉大学标记
-    const whuMarker = new BMap.Marker(point)
+    whuMarker = new BMap.Marker(point)
     map.addOverlay(whuMarker)
+    // 跳动动画
+    whuMarker.setAnimation && whuMarker.setAnimation(BMAP_ANIMATION_BOUNCE)
+    // 波浪动画Label
+    const waveLabel = new BMap.Label('<div class="whu-wave"></div>', {
+      position: point,
+      offset: new BMap.Size(-20, -20),
+    })
+    waveLabel.setStyle({
+      border: 'none',
+      background: 'none',
+      padding: '0',
+      zIndex: 1,
+    })
+    map.addOverlay(waveLabel)
 
     // 创建信息窗口
     const infoWindow = new BMap.InfoWindow(
@@ -286,6 +307,98 @@ function addGISInteractions() {
 // 页面加载完成后初始化GIS交互
 document.addEventListener('DOMContentLoaded', function () {
   addGISInteractions()
+})
+
+// ====== 计算距离功能 ======
+function getDistanceFromLatLon(lat1, lon1, lat2, lon2) {
+  const R = 6371000 // 地球半径，单位米
+  const toRad = (x) => (x * Math.PI) / 180
+  const dLat = toRad(lat2 - lat1)
+  const dLon = toRad(lon2 - lon1)
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(toRad(lat1)) *
+      Math.cos(toRad(lat2)) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2)
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+  return R * c
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  const btn = document.getElementById('calc-distance-btn')
+  if (!btn) return
+  btn.addEventListener('click', function () {
+    const resultDiv = document.getElementById('distance-result')
+    resultDiv.textContent = '正在获取您的位置...'
+    if (!navigator.geolocation) {
+      resultDiv.textContent = '您的浏览器不支持地理定位。'
+      return
+    }
+    navigator.geolocation.getCurrentPosition(
+      function (pos) {
+        const userLat = pos.coords.latitude
+        const userLng = pos.coords.longitude
+        // 武汉大学资环院坐标
+        const markerLat = 30.536139
+        const markerLng = 114.364952
+        const distance = getDistanceFromLatLon(
+          userLat,
+          userLng,
+          markerLat,
+          markerLng
+        )
+        let show
+        if (distance >= 1000) {
+          show = (distance / 1000).toFixed(2) + ' 千米'
+        } else {
+          show = Math.round(distance) + ' 米'
+        }
+        resultDiv.textContent = '您与标记点的距离约为：' + show
+
+        // ====== 新增：在地图上添加用户标记，并显示两个点 ======
+        if (globalMap) {
+          // 移除旧的用户标记
+          if (userMarker) {
+            globalMap.removeOverlay(userMarker)
+          }
+          // 移除旧的连线
+          if (userLine) {
+            globalMap.removeOverlay(userLine)
+          }
+          const userPoint = new BMap.Point(userLng, userLat)
+          userMarker = new BMap.Marker(userPoint)
+          globalMap.addOverlay(userMarker)
+          // 画线
+          const whuPoint = new BMap.Point(markerLng, markerLat)
+          userLine = new BMap.Polyline([userPoint, whuPoint], {
+            strokeColor: 'green',
+            strokeWeight: 4,
+            strokeOpacity: 0.8,
+          })
+          globalMap.addOverlay(userLine)
+          // 设置视野包含两个点
+          const viewBounds = new BMap.Bounds(
+            new BMap.Point(
+              Math.min(userLng, markerLng),
+              Math.min(userLat, markerLat)
+            ),
+            new BMap.Point(
+              Math.max(userLng, markerLng),
+              Math.max(userLat, markerLat)
+            )
+          )
+          globalMap.setViewport([userPoint, whuPoint], { zoomFactor: -1 })
+        }
+        // ====== END ======
+      },
+      function (err) {
+        resultDiv.textContent =
+          '无法获取您的位置：' + (err.message || '未知错误')
+      },
+      { enableHighAccuracy: true, timeout: 10000 }
+    )
+  })
 })
 
 // 添加键盘快捷键
