@@ -10,12 +10,13 @@ body {
   line-height: 1.6;
   color: #333;
   overflow-x: hidden;
+  font-size: 15px;
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 10px;
 }
 
 /* 导航栏样式 */
@@ -173,7 +174,7 @@ body {
 }
 
 .btn {
-  padding: 12px 24px;
+  padding: 8px 18px;
   border-radius: 50px;
   text-decoration: none;
   font-weight: 600;
@@ -181,6 +182,7 @@ body {
   display: inline-block;
   border: none;
   cursor: pointer;
+  font-size: 0.98rem;
 }
 
 .btn-primary {
@@ -247,9 +249,9 @@ body {
 /* 通用部分样式 */
 .section-title {
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   font-weight: 700;
-  margin-bottom: 2rem;
+  margin-bottom: 1.2rem;
   color: #2c5aa0;
   position: relative;
 }
@@ -268,7 +270,7 @@ body {
 
 /* 关于我部分 */
 .about {
-  padding: 30px 0;
+  padding: 28px 0;
   background: #f8f9fa;
 }
 
@@ -488,12 +490,13 @@ body {
 
 .research-card {
   background: white;
-  padding: 1.5rem;
-  border-radius: 15px;
+  padding: 1rem;
+  border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   text-align: center;
   transition: all 0.3s ease;
   border: 1px solid #f0f0f0;
+  margin-bottom: 1rem;
 }
 
 .research-card:hover {
@@ -543,6 +546,7 @@ body {
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
+  margin-bottom: 1rem;
 }
 
 .project-card:hover {
@@ -551,35 +555,52 @@ body {
 }
 
 .project-image {
+  background: none !important;
   height: 200px;
-  background: linear-gradient(45deg, #2c5aa0, #667eea);
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
   font-size: 3rem;
 }
-
+.project-image img {
+  max-width: 100%;
+  max-height: 180px;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 10px;
+  display: block;
+  background: transparent;
+}
 .project-content {
-  padding: 1.5rem;
+  padding-left: 0.7rem;
+  padding-right: 0.7rem;
 }
-
+@media (max-width: 768px) {
+  .project-content {
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
+  }
+}
 .project-content h3 {
-  font-size: 1.5rem;
+  font-size: 1.02rem;
   color: #2c5aa0;
-  margin-bottom: 1rem;
+  margin-bottom: 0.4rem;
 }
-
 .project-content p {
   color: #666;
-  margin-bottom: 1.5rem;
-  line-height: 1.6;
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+  font-size: 0.95rem;
 }
-
 .project-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.3rem;
+  margin-bottom: 0.3rem;
 }
 
 .project-tags span {
@@ -605,14 +626,15 @@ body {
 
 .publication-card {
   background: white;
-  padding: 1.5rem;
-  border-radius: 15px;
+  padding: 1rem;
+  border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   border: 1px solid #f0f0f0;
   display: flex;
   align-items: flex-start;
   gap: 1rem;
+  margin-bottom: 1rem;
 }
 
 .publication-card:hover {
@@ -700,6 +722,7 @@ body {
   display: flex;
   align-items: flex-start;
   gap: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .practice-card:hover {
@@ -758,6 +781,7 @@ body {
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
+  margin-bottom: 1rem;
 }
 
 .award-category:hover {
@@ -791,6 +815,7 @@ body {
   background: #f8f9fa;
   border-radius: 10px;
   transition: all 0.3s ease;
+  margin-bottom: 1rem;
 }
 
 .award-item:hover {
@@ -843,6 +868,7 @@ body {
   background: #f8f9fa;
   border-radius: 10px;
   transition: all 0.3s ease;
+  margin-bottom: 1rem;
 }
 
 .contact-item:hover {
@@ -889,11 +915,12 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
   margin-bottom: 2rem;
+  padding: 1.2rem 0 0.5rem 0;
 }
 
 .footer-section h4 {
   margin-bottom: 1rem;
-  font-size: 1.2rem;
+  font-size: 1.05rem;
 }
 
 .footer-section ul {
@@ -901,7 +928,7 @@ body {
 }
 
 .footer-section ul li {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.3rem;
 }
 
 .footer-section ul li a {
@@ -1073,6 +1100,67 @@ body {
   .research-grid {
     grid-template-columns: 1fr;
   }
+  .container {
+    padding: 0 4vw;
+  }
+  .section-title {
+    font-size: 1.15rem;
+    margin-bottom: 0.7rem;
+  }
+  .about,
+  .research,
+  .projects,
+  .publications,
+  .contact {
+    padding: 16px 0;
+  }
+  .project-card,
+  .research-card,
+  .publication-card {
+    padding: 0.7rem;
+    margin-bottom: 0.7rem;
+    border-radius: 10px;
+  }
+  .project-content h3,
+  .research-card h3,
+  .publication-content h3 {
+    font-size: 0.98rem;
+    margin-bottom: 0.25rem;
+  }
+  .project-content p,
+  .research-card p,
+  .publication-content p {
+    font-size: 0.89rem;
+    margin-bottom: 0.3rem;
+  }
+  .project-tags,
+  .research-card .project-tags {
+    gap: 0.2rem;
+    margin-bottom: 0.2rem;
+  }
+  .btn {
+    padding: 7px 12px;
+    font-size: 0.92rem;
+  }
+  .footer-content {
+    padding: 0.7rem 0 0.2rem 0;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+  .footer-section h4 {
+    font-size: 0.98rem;
+    margin-bottom: 0.4rem;
+  }
+  .footer-section ul li {
+    margin-bottom: 0.2rem;
+  }
+  .project-image,
+  .project-image img {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100vw !important;
+    max-height: 140px !important;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1081,7 +1169,8 @@ body {
   }
 
   .section-title {
-    font-size: 2rem;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
   }
 
   .hero-buttons {
@@ -1090,9 +1179,8 @@ body {
   }
 
   .btn {
-    width: 100%;
-    max-width: 200px;
-    text-align: center;
+    padding: 6px 8px;
+    font-size: 0.85rem;
   }
 }
 
