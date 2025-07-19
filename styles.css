@@ -1100,3 +1100,53 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #1e3a5f;
 }
+
+.hero-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.hero-image img {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  max-width: 320px;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .hero-image img {
+    max-width: 90vw;
+  }
+  .hero-image {
+    margin-top: 1.5rem;
+  }
+}
+
+.fengshui-luopan {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+.fengshui-luopan svg {
+  max-width: 240px;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: auto;
+  background: transparent;
+}
+@media (max-width: 768px) {
+  .fengshui-luopan svg {
+    max-width: 90vw;
+  }
+  .fengshui-luopan {
+    margin-top: 1rem;
+  }
+}
